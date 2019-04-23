@@ -93,7 +93,7 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 
 ## 이미지 받기
     $ cd
-    $ curl -sSL http://bit.ly/2ysbOFE | bash -s 1.3.0
+    $ curl -sSL http://bit.ly/2ysbOFE | bash -s
 
 
 ## 인증서 설치
