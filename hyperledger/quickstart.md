@@ -189,7 +189,7 @@ Generating channel configuration transaction 'channel.tx’
 
     $ export CHANNEL_NAME=mychannel
 
-Define the anchor peer for Org1
+Org1 그룹의 Anchor Peer 정의
 
     $ ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
 
@@ -200,7 +200,7 @@ Define the anchor peer for Org1
     2018-12-05 09:42:01.978 UTC [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
 
 
-Define the anchor peer for Org2
+Org2 그룹의 Anchor Peer 정의
 
     $ ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
 
