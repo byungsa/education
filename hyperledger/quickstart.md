@@ -559,16 +559,16 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 
 ### postgresql 접속 설정
 
-    vi ~/blockchain-explorer/app/explorerconfig.json
+    vi ~/blockchain-explorer/app/explorerconfig.json (안해도 됨)
 
 
 ### DB 생성
 
-    cd ~/blockchain-explorer/app/persistence/fabric/postgreSQL/db
+    cd ~/blockchain-explorer/app/persistence/fabric/postgreSQL/db 
     ./createdb.sh
 
 
-### DB 생성확인
+### DB 생성확인 (안해도 됨)
 
     sudo -u postgres psql
     postgres=# \l
@@ -587,7 +587,7 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 ### 오류수정
 
     vi ~/blockchain-explorer/client/src/components/View/LandingPage.spec.js
-    > getBlockActivity: jest.fn(), // 추가
+    > getBlockActivity: jest.fn(), // 14열에 추가
 
 ### Explorer 빌드
 터미널을 하나 더 열고 실행
