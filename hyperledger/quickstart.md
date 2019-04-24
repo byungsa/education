@@ -508,13 +508,6 @@ AND 조건 : Org1 멤버중의 하나 && Org2 멤버중의 하나
 
 결과
 
-    900
-
-
-    peer chaincode query -C $CHANNEL_NAME -n mycc -c '{"Args":["query","a"]}'
-
-결과
-
     210
 
 
