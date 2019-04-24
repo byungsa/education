@@ -102,7 +102,7 @@ first-network로 이동
 
 설정파일 : ~/fabric-samples/first-network/crypto-config.yaml
 
-    $ vi ~/fabric-samples/first-network/crypto-config.yaml
+    $ vi ~/fabric-samples/first-network/crypto-config.yaml (안해도 됨)
 
 인증서 생성
 
@@ -119,7 +119,7 @@ first-network로 이동
 
 설정파일 
 
-    $ vi ~/fabric-samples/first-network/configtx.yaml
+    $ vi ~/fabric-samples/first-network/configtx.yaml (안해도 됨)
 
 
 변수설정
@@ -194,6 +194,23 @@ Define the anchor peer for Org2
 
 # Fabric 네트워크 시작 
 
+## 한번에 시작하기
+
+### Fabric 네트워크 인증서, 채널설정 한번에 하기 
+
+    $ ./byfn.sh generate
+
+
+### Fabric 네트워크 시작 한번에 하기
+
+    $ ./byfn.sh up
+
+### 네트워크 종료 한번에 하기
+    $ ./byfn.sh down
+
+## 단계적으로 시작하게
+
+
 Fabric 네트워크 시작
 
     $ docker-compose -f docker-compose-cli.yaml up -d
@@ -220,27 +237,14 @@ Fabric 네트워크 시작
 
 결과
 
-    CONTAINER ID        IMAGE                               COMMAND             CREATED             STATUS              PORTS                         NAMES
-    8f5103e26d79        hyperledger/fabric-tools:latest     "/bin/bash"         49 seconds ago      Up 48 seconds                                     cli
+    CONTAINER ID        IMAGE                               COMMAND             CREATED             STATUS              PORTS                      NAMES
+    8f5103e26d79        hyperledger/fabric-tools:latest     "/bin/bash"         49 seconds ago      Up 48 seconds                                  cli
     d85a5bcd4855        hyperledger/fabric-orderer:latest   "orderer"           54 seconds ago      Up 50 seconds       0.0.0.0:7050->7050/tcp     orderer.example.com
     15abb3e17781        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 52 seconds       0.0.0.0:7051->7051/tcp     peer0.org1.example.com
     35cfe9c7b062        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 51 seconds       0.0.0.0:8051->8051/tcp     peer1.org1.example.com
     f36dad7aa063        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 52 seconds       0.0.0.0:9051->9051/tcp     peer0.org2.example.com
     1ef857b24afc        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 49 seconds       0.0.0.0:10051->10051/tcp   peer1.org2.example.com
 
-
-
-## Fabric 네트워크 인증서, 채널설정 한번에 하기 
-
-    $ ./byfn.sh generate
-
-
-## Fabric 네트워크 시작 한번에 하기
-
-    $ ./byfn.sh up
-
-## 네트워크 종료 한번에 하기
-    $ ./byfn.sh down
 
 
 
