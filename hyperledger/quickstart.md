@@ -12,13 +12,13 @@
 ## 업데이트
     $ sudo apt-get update
 
-## Curl 설치
+## Curl 설치 (대부분 설치되어 있음)
     $ sudo apt-get install curl
 
 ## Docker, Docker compose 설치
 (Docker의 버전이 오래된 경우 오류 발생가능. 기존의 구버전의  Docker를 삭제하고 재설치)
 
-    $ sudo apt-get remove docker docker-engine docker.io
+    $ sudo apt-get remove docker docker-engine docker.io (대부분 설치 안되어 있음)
     $ curl -fsSL https://get.docker.com/ | sudo sh
     $ sudo apt install docker-compose
 
@@ -31,8 +31,8 @@ Docker가 root 권한으로 설치되므로 일반 사용자도 Docker를 사용
 
 
 ## Docker 설치 확인
-    $ docker version
-    $ docker run hello-world
+    $ docker version (안해도 됨)
+    $ docker run hello-world (안해도 됨)
     
     
 ## Golang 설치
@@ -80,14 +80,12 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 
 다음과 같이 2.7버전을 설치하고 버전을 확인합니다.
 
-    $ sudo apt-get install python
-    $ python --version
+    $ sudo apt-get install python (대부분 설치되어 있음)
+    $ python --version (안해도 됨)
 
 
 ***
 
-
-***    
 
 # Fabric 실습
 
@@ -230,6 +228,19 @@ Fabric 네트워크 시작
     f36dad7aa063        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 52 seconds       0.0.0.0:9051->7051/tcp, 0.0.0.0:9053->7053/tcp     peer0.org2.example.com
     15abb3e17781        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 52 seconds       0.0.0.0:7051->7051/tcp, 0.0.0.0:7053->7053/tcp     peer0.org1.example.com
 
+
+
+## Fabric 네트워크 인증서, 채널설정 한번에 하기 
+
+    $ ./byfn.sh generate
+
+
+## Fabric 네트워크 시작 한번에 하기
+
+    $ ./byfn.sh up
+
+## 네트워크 종료 한번에 하기
+    $ ./byfn.sh down
 
 
 
