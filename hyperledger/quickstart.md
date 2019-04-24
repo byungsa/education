@@ -213,29 +213,7 @@ Define the anchor peer for Org2
 디렉토리 channel-artifacts에 Org1MSPanchors.tx  Org2MSPanchors.tx 가 생성됨
 
 
-***
-
-
-# Fabric 네트워크 시작 
-
-## 한번에 시작하기
-
-### Fabric 네트워크 인증서, 채널설정 한번에 하기 
-
-    $ ./byfn.sh generate
-
-
-### Fabric 네트워크 시작 한번에 하기
-
-    $ ./byfn.sh up
-
-### 네트워크 종료 한번에 하기
-    $ ./byfn.sh down
-
-## 단계적으로 시작하게
-
-
-Fabric 네트워크 시작
+## Fabric 네트워크 시작
 
     $ docker-compose -f docker-compose-cli.yaml up -d
     
