@@ -10,41 +10,41 @@
 * Python : 2.7
 
 ## 업데이트
-    $ sudo apt-get update
+    sudo apt-get update
 
 ## Curl 설치 (대부분 설치되어 있음)
-    $ sudo apt-get install curl
+    sudo apt-get install curl
 
 ## Docker, Docker compose 설치
 (Docker의 버전이 오래된 경우 오류 발생가능. 기존의 구버전의  Docker를 삭제하고 재설치)
 
-    $ sudo apt-get remove docker docker-engine docker.io (대부분 설치 안되어 있음)
-    $ curl -fsSL https://get.docker.com/ | sudo sh
-    $ sudo apt install docker-compose
+    sudo apt-get remove docker docker-engine docker.io (대부분 설치 안되어 있음)
+    curl -fsSL https://get.docker.com/ | sudo sh
+    sudo apt install docker-compose
 
 ## Docker 권한설정
 Docker가 root 권한으로 설치되므로 일반 사용자도 Docker를 사용하기 위해서는 권한을 설정해야 합니다.
 
 로그아웃 후 다시 로그인을 하면 권한이 적용됩니다.
 
-    $ sudo usermod -aG docker $USER
+    sudo usermod -aG docker $USER
 
 
 ## Docker 설치 확인
-    $ docker version (안해도 됨)
-    $ docker run hello-world (안해도 됨)
+    docker version (안해도 됨)
+    docker run hello-world (안해도 됨)
     
     
 ## Golang 설치
 하이퍼렛저는 Go Lang으로 개발되었습니다. Go version 1.10이상이어야 합니다.
 
-    $ cd
-    $ wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz
-    $ tar zxvf go1.11.1.linux-amd64.tar.gz
+    cd
+    wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz
+    tar zxvf go1.11.1.linux-amd64.tar.gz
 
 Go를 설치하면 path를 설정해야 제대로 go를 사용할 수 있습니다. 로그인시 불러들이는 .profile 파일을 수정합니다.
 
-    $ vi ~/.profile
+    vi ~/.profile
 
     export GOROOT=$HOME/go
     export GOPATH=$HOME/workspace
@@ -62,16 +62,16 @@ Node.js를 이용한 하이퍼렛저 패브릭 SDK로 개발을 한다면 Node.j
 
 버전을 8.X 로 설치하기 위해서 PPA 를 등록하고 설치합니다.
 
-    $ cd ~
-    $ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
-    $ sudo bash nodesource_setup.sh
-    $ sudo apt-get install nodejs
-    $ sudo npm install npm
-    $ sudo chown -R $USER:$(id -gn $USER) /home/ubuntu/.config 
+    cd ~
+    curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+    sudo bash nodesource_setup.sh
+    sudo apt-get install nodejs
+    sudo npm install npm
+    sudo chown -R $USER:$(id -gn $USER) /home/ubuntu/.config 
 
 
 ## 개발도구 설치
-    $ sudo apt-get install gcc g++ make
+    sudo apt-get install gcc g++ make
     
 ## Python 설치
 우분투 16.04 버전에는 Python 3.5.1이 설치됩니다. 
@@ -80,8 +80,8 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 
 다음과 같이 2.7버전을 설치하고 버전을 확인합니다.
 
-    $ sudo apt-get install python (대부분 설치되어 있음)
-    $ python --version (안해도 됨)
+    sudo apt-get install python (대부분 설치되어 있음)
+    python --version (안해도 됨)
 
 
 ***
@@ -90,29 +90,29 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 # Fabric 실습
 
 ## 이미지 받기
-    $ cd
-    $ curl -sSL http://bit.ly/2ysbOFE | bash -s
+    cd
+    curl -sSL http://bit.ly/2ysbOFE | bash -s
     
     
 다음 옵션을 통해 다른 버전을 받을 수도 있음
 
-    $ curl -sSL http://bit.ly/2ysbOFE | bash -s <fabric> <fabric-ca> <thirdparty>
-    $ curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15
+    curl -sSL http://bit.ly/2ysbOFE | bash -s <fabric> <fabric-ca> <thirdparty>
+    curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15
 
 ## Fabric 네트워크 한번에 시작하기
 
 인증서, 채널설정 한 번에 하기
 
-    $ ./byfn.sh generate
+    ./byfn.sh generate
 
 
 네트워크 시작 한번에 하기
 
-    $ ./byfn.sh up
+    ./byfn.sh up
 
 네트워크 종료 및 도커 컨테이너 삭제 한 번에 하기
 
-    $ ./byfn.sh down
+    ./byfn.sh down
 
 ## Fabric 네트워크 단계적으로 시작하기
 
@@ -122,15 +122,15 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 
 first-network로 이동
 
-    $ cd ~/fabric-samples/first-network/
+    cd ~/fabric-samples/first-network/
 
 설정파일 : ~/fabric-samples/first-network/crypto-config.yaml
 
-    $ vi ~/fabric-samples/first-network/crypto-config.yaml (안해도 됨)
+    vi ~/fabric-samples/first-network/crypto-config.yaml (안해도 됨)
 
 인증서 생성
 
-    $ ../bin/cryptogen generate --config=./crypto-config.yaml
+    ../bin/cryptogen generate --config=./crypto-config.yaml
 
 
 결과
@@ -143,17 +143,17 @@ first-network로 이동
 
 설정파일 
 
-    $ vi ~/fabric-samples/first-network/configtx.yaml (안해도 됨)
+    vi ~/fabric-samples/first-network/configtx.yaml (안해도 됨)
 
 
 변수설정
 
-    $ export FABRIC_CFG_PATH=$PWD
+    export FABRIC_CFG_PATH=$PWD
 
 
 Generating Orderer Genesis block
 
-    $ ../bin/configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+    ../bin/configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
 
 디렉토리 channel-artifacts에 genesis.block 이 생성됨
 
@@ -167,11 +167,11 @@ Generating Orderer Genesis block
 
 변수설정
 
-    $ export CHANNEL_NAME=mychannel
+    export CHANNEL_NAME=mychannel
 
 Generating channel configuration transaction 'channel.tx’
 
-    $ ../bin/configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+    ../bin/configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
 
 디렉토리 channel-artifacts에 channel.tx (channel configuration transaction)가 channel.tx 생성됨
 
@@ -187,11 +187,11 @@ Generating channel configuration transaction 'channel.tx’
 
 변수설정
 
-    $ export CHANNEL_NAME=mychannel
+    export CHANNEL_NAME=mychannel
 
 Org1 그룹의 Anchor Peer 정의
 
-    $ ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+    ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
 
 결과
 
@@ -202,7 +202,7 @@ Org1 그룹의 Anchor Peer 정의
 
 Org2 그룹의 Anchor Peer 정의
 
-    $ ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+    ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
 
 결과
 
@@ -215,7 +215,7 @@ Org2 그룹의 Anchor Peer 정의
 
 ## Fabric 네트워크 시작
 
-    $ docker-compose -f docker-compose-cli.yaml up -d
+    docker-compose -f docker-compose-cli.yaml up -d
     
 결과
 
@@ -235,7 +235,7 @@ Org2 그룹의 Anchor Peer 정의
     
 이미지 확인
 
-    $ docker ps
+    docker ps
 
 결과
 
@@ -292,7 +292,7 @@ Org2 그룹의 Anchor Peer 정의
 ## Fabric 실습
 Fabric cli 컨테이너로 접속
 
-    $ docker exec -it cli bash
+    docker exec -it cli bash
 
 
 결과
@@ -303,7 +303,7 @@ Fabric cli 컨테이너로 접속
 
 환경변수설정
 
-    $ export CHANNEL_NAME=mychannel
+    export CHANNEL_NAME=mychannel
 
 
 ## Fabric 채널 생성
@@ -545,29 +545,29 @@ Query
 
 nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq[https://stedolan.github.io/jq/]
 
-    $ sudo apt install -y postgresql jq
+    sudo apt install -y postgresql jq
 
 
 ### Hyperledger Explorer 설치
 
-    $ cd
-    $ git clone -b release-3.7 https://github.com/hyperledger/blockchain-explorer
+    cd
+    git clone -b release-3.7 https://github.com/hyperledger/blockchain-explorer
 
 
 ### postgresql 접속 설정
 
-    $ vi ~/blockchain-explorer/app/explorerconfig.json
+    vi ~/blockchain-explorer/app/explorerconfig.json
 
 
 ### DB 생성
 
-    $ cd ~/blockchain-explorer/app/persistence/fabric/postgreSQL/db
-    $ ./createdb.sh
+    cd ~/blockchain-explorer/app/persistence/fabric/postgreSQL/db
+    ./createdb.sh
 
 
 ### DB 생성확인
 
-    $ sudo -u postgres psql
+    sudo -u postgres psql
     postgres=# \l
 
 
@@ -578,54 +578,54 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 
 ### Explorer에 인증서 경로 지정
 
-    $ vi ~/blockchain-explorer/app/platform/fabric/config.json
+    vi ~/blockchain-explorer/app/platform/fabric/config.json
     > :%s /fabric-path/\/home\/ubuntu/g
 
 ### 오류수정
 
-    $ vi ~/blockchain-explorer/client/src/components/View/LandingPage.spec.js
+    vi ~/blockchain-explorer/client/src/components/View/LandingPage.spec.js
     > getBlockActivity: jest.fn(), // 추가
 
 ### Explorer 빌드
 터미널을 하나 더 열고 실행
 
-    $ cd ~/blockchain-explorer
-    $ npm install
-    $ cd ~/blockchain-explorer/client/
-    $ npm install
-    $ npm test -- -u --coverage
-    $ npm run build
+    cd ~/blockchain-explorer
+    npm install
+    cd ~/blockchain-explorer/client/
+    npm install
+    npm test -- -u --coverage
+    npm run build
 
 
 ### Explorer 실행
-    $ cd ~/blockchain-explorer
-    $ ./start.sh
+    cd ~/blockchain-explorer
+    ./start.sh
 
 ### Explorer 종료
-    $ cd ~/blockchain-explorer
-    $ ./stop.sh
+    cd ~/blockchain-explorer
+    ./stop.sh
 
 ### 실시간 로그보기
-    $ tail -f blockchain-explorer/logs/console/console-2018-12-06.log
+    tail -f blockchain-explorer/logs/console/console-2018-12-06.log
     
 # 실시간 로그 확인하기
 
 ## ssh 창을 4개를 띄움.
 ### 1번창
 
-    $ docker exec -it cli bash
+    docker exec -it cli bash
     
 ### 2번창
 
-    $ docker logs -f orderer.example.com
+    docker logs -f orderer.example.com
 
 ### 3번창
 
-    $ docker logs -f peer0.org1.example.com
+    docker logs -f peer0.org1.example.com
 
 ### 4번창
 
-    $ docker logs -f peer0.org2.example.com
+    docker logs -f peer0.org2.example.com
 
 ### 1번창에서 Invoke
 ### b의 10을 a로 이체하는 체인코드 invoke
@@ -635,7 +635,7 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
     CORE_PEER_ADDRESS=peer0.org1.example.com:7051
     CORE_PEER_LOCALMSPID="Org1MSP"
     CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
-    peer chaincode invoke -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C $CHANNEL_NAME -n mycc --peerAddresses peer0.org1.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses peer0.org2.example.com:9051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"Args":["invoke","b","a","10"]}'
+    peer chaincode invoke -o orderer.example.com:7050 --tls true --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C $CHANNEL_NAME -n mycc --peerAddresses peer0.org1.example.com:7051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses peer0.org2.example.com:8051 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"Args":["invoke","b","a","10"]}'
 
 
 ### 2,3,4번창의 로그를 확인
