@@ -92,6 +92,12 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 ## 이미지 받기
     $ cd
     $ curl -sSL http://bit.ly/2ysbOFE | bash -s
+    
+    
+다음 옵션을 통해 다른 버전을 받을 수도 있음
+
+    $ curl -sSL http://bit.ly/2ysbOFE | bash -s <fabric> <fabric-ca> <thirdparty>
+    $ curl -sSL http://bit.ly/2ysbOFE | bash -s -- 1.4.1 1.4.1 0.4.15
 
 ## Fabric 네트워크 한번에 시작하기
 
@@ -100,11 +106,11 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
     $ ./byfn.sh generate
 
 
-한 번에 시작하기
+네트워크 시작 한번에 하기
 
     $ ./byfn.sh up
 
-한 번에 종료 및 삭제하기
+네트워크 종료 및 도커 컨테이너 삭제 한 번에 하기
 
     $ ./byfn.sh down
 
