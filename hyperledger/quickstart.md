@@ -12,8 +12,8 @@
 ## 업데이트
     sudo apt-get update
 
-## Curl 설치 (대부분 설치되어 있음)
-    sudo apt-get install curl
+## Curl 설치
+    sudo apt-get install curl (실습때는 안해도 됨)
 
 ## Docker, Docker compose 설치
 (Docker의 버전이 오래된 경우 오류 발생가능. 기존의 구버전의  Docker를 삭제하고 재설치)
