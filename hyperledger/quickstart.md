@@ -101,6 +101,11 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 
 ## Fabric 네트워크 한번에 시작하기
 
+first-network로 이동
+
+    cd ~/fabric-samples/first-network/
+
+
 인증서, 채널설정 한 번에 하기
 
     ./byfn.sh generate
