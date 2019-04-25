@@ -80,8 +80,8 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
 
 다음과 같이 2.7버전을 설치하고 버전을 확인합니다.
 
-    sudo apt-get install python (대부분 설치되어 있음)
-    python --version (안해도 됨)
+    sudo apt-get install python (실습때는 안해도 됨)
+    python --version (실습때는 안해도 됨)
 
 
 ***
