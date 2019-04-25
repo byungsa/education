@@ -587,7 +587,7 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 ### Explorer에 인증서 경로 지정
 
     vi ~/blockchain-explorer/app/platform/fabric/config.json
-    > :%s /fabric-path/\/home\/ubuntu/g
+    > :%s /fabric-path/home\/ubuntu/g
 
 ### 오류수정
 
