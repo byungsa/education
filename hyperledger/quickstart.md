@@ -559,7 +559,7 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 ### Hyperledger Explorer 설치
 
     cd
-    git clone -b release-3.7 https://github.com/hyperledger/blockchain-explorer
+    git clone -b release-4.0 https://github.com/hyperledger/blockchain-explorer
 
 
 ### postgresql 접속 설정
