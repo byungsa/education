@@ -66,7 +66,7 @@ Node.js를 이용한 하이퍼렛저 패브릭 SDK로 개발을 한다면 Node.j
     curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
     sudo bash nodesource_setup.sh
     sudo apt-get install nodejs
-    sudo npm install npm
+    sudo npm install npm@5.6.0 -g
     sudo chown -R $USER:$(id -gn $USER) /home/ubuntu/.config 
 
 
