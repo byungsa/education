@@ -29,7 +29,8 @@ fabcar 디렉토리로 이동합니다.
     chmod u+x prereqs-ubuntu.sh
     ./prereqs-ubuntu.sh
     
-Installing components (sudo 또는 su 권한으로 설치하지 말것)
+## Installing components (sudo 또는 su 권한으로 설치하지 말것)
+
     npm install -g composer-cli@0.20
     npm install -g composer-rest-server@0.20
     npm install -g generator-hyperledger-composer@0.20
@@ -37,7 +38,9 @@ Installing components (sudo 또는 su 권한으로 설치하지 말것)
     npm install -g composer-playground@0.20
     mkdir ~/fabric-dev-servers && cd ~/fabric-dev-servers
     curl -O https://raw.githubusercontent.com/hyperledger/composer-tools/master/packages/fabric-dev-servers/fabric-dev-servers.tar.gz
-tar -xvf fabric-dev-servers.tar.gz
+    tar -xvf fabric-dev-servers.tar.gz
+    export FABRIC_VERSION=hlfv12
+    ./downloadFabric.sh
     
 ## Step One: Creating a business network structure
     yo hyperledger-composer:businessnetwork
