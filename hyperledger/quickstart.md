@@ -571,6 +571,7 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 
     cd ~/blockchain-explorer/app/persistence/fabric/postgreSQL/db 
     ./createdb.sh
+    (오류 발생시에는 $ sudo -u postgres ./createdb.sh)
 
 
 ### DB 생성확인 (안해도 됨)
