@@ -41,6 +41,13 @@ fabcar 디렉토리로 이동합니다.
     tar -xvf fabric-dev-servers.tar.gz
     export FABRIC_VERSION=hlfv12
     ./downloadFabric.sh
+    cd ~/fabric-dev-servers
+    export FABRIC_VERSION=hlfv12
+    ./startFabric.sh
+    ./createPeerAdminCard.sh
+    
+## Start the web app ("Playground")
+    composer-playground
     
 ## Step One: Creating a business network structure
     yo hyperledger-composer:businessnetwork
