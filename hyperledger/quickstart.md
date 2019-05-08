@@ -549,6 +549,11 @@ Query
 
 # Hyperledger Explorer
 
+## 기존에 설치 실패했을 경우 기존 소스 삭제
+    cd
+    rm -rf blockchain-explorer
+    
+
 ## 사전설치
 
 nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq[https://stedolan.github.io/jq/]
@@ -570,9 +575,8 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 ### DB 생성
 
     cd ~/blockchain-explorer/app/persistence/fabric/postgreSQL/db 
-    ./createdb.sh
-    (오류 발생시에는 $ sudo -u postgres ./createdb.sh)
-
+    sudo -u postgres ./createdb.sh
+    (원래 ./createdb.sh 만 해도 되나 오류가 발생하는 경우가 많음)
 
 ### DB 생성확인 (안해도 됨)
 
