@@ -83,7 +83,18 @@ Fabric Node.js SDK는 Python 2.7를 사용해야 npm 설정이 잘 작동합니�
     sudo apt-get install python (실습때는 안해도 됨)
     python --version (실습때는 안해도 됨)
 
+# 위 과정 한 번에 다 하기
+    sudo apt-get update && curl -fsSL https://get.docker.com/ | sudo sh && sudo apt install docker-compose -y && sudo usermod -aG docker $USER && cd && wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz && tar zxvf go1.11.1.linux-amd64.tar.gz && cd && curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt-get install nodejs &&  sudo npm install npm@5.6.0 -g && sudo chown -R $USER:$(id -gn $USER) /home/ubuntu/.config  && sudo apt-get install gcc g++ make
+    
+과정 끝나면 
 
+    vi ~/.profile
+
+    export GOROOT=$HOME/go
+    export GOPATH=$HOME/workspace
+    export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+
+PATH가 적용되려면 로그아웃후 다시 로그인 해야합니다.
 ***
 
 
