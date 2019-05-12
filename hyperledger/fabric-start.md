@@ -862,6 +862,14 @@ peer0.org1 에 체인코드 인스톨
     peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go
 
 
+peer1.org1 에 체인코드 인스톨
+
+    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    CORE_PEER_ADDRESS=peer1.org1.example.com:8051
+    CORE_PEER_LOCALMSPID="Org1MSP"
+    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls/ca.crt
+    peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go
+
 
 peer0.org2 에 체인코드 인스톨
 
@@ -871,6 +879,14 @@ peer0.org2 에 체인코드 인스톨
     CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
     peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go
 
+
+peer1.org2 에 체인코드 인스톨
+
+    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+    CORE_PEER_ADDRESS=peer1.org2.example.com:10051
+    CORE_PEER_LOCALMSPID="Org2MSP"
+    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+    peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go
 
 ### chaincode_example02.go 
 https://github.com/hyperledger/fabric-samples/blob/release-1.3/chaincode/chaincode_example02/go/chaincode_example02.go
