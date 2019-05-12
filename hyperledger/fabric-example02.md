@@ -224,3 +224,52 @@ Org2 Admin 에서의 서명
     export CORE_PEER_ADDRESS=peer0.org2.example.com:9051
     peer channel update -f org3_update_in_envelope.pb -c $CHANNEL_NAME -o orderer.example.com:7050 --tls --cafile $ORDERER_CA
 
+
+***
+
+## Org3 Peer의 채널 참여
+
+Org3 컨테이너 실행
+
+    cd ~/fabric-samples/first-network/
+    docker-compose -f docker-compose-org3.yaml up -d
+
+
+
+Org3cli 접속
+
+    docker exec -it Org3cli bash
+    
+
+환경변수 입력
+    export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem && export CHANNEL_NAME=mychannel
+
+
+0번블록 생성 및 채널참여
+
+    peer channel fetch 0 mychannel.block -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
+    peer channel join -b mychannel.block
+
+
+peer1.org3의 채널 참여
+    export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/peers/peer1.org3.example.com/tls/ca.crt && export CORE_PEER_ADDRESS=peer1.org3.example.com:12051
+    peer channel join -b mychannel.block
+
+
+Org3에서 mycc 2.0으로 업데이트 함.
+
+    peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
+
+
+Org1, Org2에서도 mycc 2.0으로 업데이트해야함.
+Org1과 Org2 에서 mycc를 업데이트함.
+
+    peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
+
+
+Org1 또는 Org2에서 mycc Endosement 정책 업데이트를 함.
+
+    peer chaincode upgrade -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 2.0 -c '{"Args":["init","a","90","b","210"]}' -P "OR ('Org1MSP.peer','Org2MSP.peer','Org3MSP.peer')"
+
+
+    
