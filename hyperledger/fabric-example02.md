@@ -124,12 +124,12 @@ org3-crypto.yaml 설정파일은 Org3 그룹만 있고 orderer에 대한 정보�
 
 ## CLI 환경설정
 
-docker cli 연결
+### docker cli 연결
 
     docker exec -it cli bash
     
     
-환경변수 설정
+### 환경변수 설정
 
     export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem  && export CHANNEL_NAME=mychannel
 
@@ -160,7 +160,7 @@ docker cli 연결
 
 
 
-config.json을 protobuf로 인코딩
+### config.json을 protobuf로 인코딩
 
     configtxlator proto_encode --input config.json --type common.Config --output config.pb
 
@@ -168,7 +168,7 @@ config.json을 protobuf로 인코딩
 결과 : config.pb 생성. 
 
 
-modified_config.json을 protobuf로 인코딩
+### modified_config.json을 protobuf로 인코딩
 
 
     configtxlator proto_encode --input modified_config.json --type common.Config --output modified_config.pb
@@ -177,7 +177,7 @@ modified_config.json을 protobuf로 인코딩
 결과 : modified_config.pb 생성
 
 
-원래의 config.pb와 수정된 modified_config.pb 새롭게 업데이트 될 protobuf bynary 생성
+### 원래의 config.pb와 수정된 modified_config.pb 새롭게 업데이트 될 protobuf bynary 생성
 
     configtxlator compute_update --channel_id $CHANNEL_NAME --original config.pb --updated modified_config.pb --output org3_update.pb
 
@@ -185,14 +185,14 @@ modified_config.json을 protobuf로 인코딩
 결과 : org3_update.pb 생성
 
 
-수정가능한 org3_update.json 형태 파일 생성
+### 수정가능한 org3_update.json 형태 파일 생성
 
     configtxlator proto_decode --input org3_update.pb --type common.ConfigUpdate | jq . > org3_update.json
 
 결과 : org3_update.json 생성
 
 
-json 양식에 맞게 header 등의 정보 추가.
+### json 양식에 맞게 header 등의 정보 추가.
 
     echo '{"payload":{"header":{"channel_header":{"channel_id":"mychannel", "type":2}},"data":{"config_update":'$(cat org3_update.json)'}}}' | jq . > org3_update_in_envelope.json
 
@@ -200,7 +200,7 @@ json 양식에 맞게 header 등의 정보 추가.
 결과 : org3_update_in_envelope.json 생성
 
 
-org3_update_in_envelope.json을 protobuf 인코딩
+### org3_update_in_envelope.json을 protobuf 인코딩
 
     configtxlator proto_encode --input org3_update_in_envelope.json --type common.Envelope --output org3_update_in_envelope.pb
 
@@ -210,13 +210,13 @@ org3_update_in_envelope.json을 protobuf 인코딩
 
 ## 서명 및 업데이트
 
-Org1 Admin 에서의 서명
+### Org1 Admin 에서의 서명
 
     peer channel signconfigtx -f org3_update_in_envelope.pb
 
     
 
-Org2 Admin 에서의 서명
+### Org2 Admin 에서의 서명
 
     export CORE_PEER_LOCALMSPID="Org2MSP"
     export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
@@ -229,45 +229,47 @@ Org2 Admin 에서의 서명
 
 ## Org3 Peer의 채널 참여
 
-Org3 컨테이너 실행
+### Org3 컨테이너 실행
 
     cd ~/fabric-samples/first-network/
     docker-compose -f docker-compose-org3.yaml up -d
 
 
 
-Org3cli 접속
+### Org3cli 접속
 
     docker exec -it Org3cli bash
     
 
-환경변수 입력
+### 환경변수 입력
+
     export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem && export CHANNEL_NAME=mychannel
 
 
-0번블록 생성 및 채널참여
+### 0번블록 생성 및 채널참여
 
     peer channel fetch 0 mychannel.block -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
     peer channel join -b mychannel.block
 
 
-peer1.org3의 채널 참여
+### peer1.org3의 채널 참여
+
     export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org3.example.com/peers/peer1.org3.example.com/tls/ca.crt && export CORE_PEER_ADDRESS=peer1.org3.example.com:12051
     peer channel join -b mychannel.block
 
 
-Org3에서 mycc 2.0으로 업데이트 함.
+### Org3에서 mycc 2.0으로 업데이트 함.
 
     peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
 
 
-Org1, Org2에서도 mycc 2.0으로 업데이트해야함.
+### Org1, Org2에서도 mycc 2.0으로 업데이트해야함.
 Org1과 Org2 에서 mycc를 업데이트함.
 
     peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02/go/
 
 
-Org1 또는 Org2에서 mycc Endosement 정책 업데이트를 함.
+### Org1 또는 Org2에서 mycc Endosement 정책 업데이트를 함.
 
     peer chaincode upgrade -o orderer.example.com:7050 --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n mycc -v 2.0 -c '{"Args":["init","a","90","b","210"]}' -P "OR ('Org1MSP.peer','Org2MSP.peer','Org3MSP.peer')"
 
