@@ -719,7 +719,7 @@ vi 설치
     
 vi 실행
 
-    sudo vi /etc/hosts
+    vi /etc/hosts
     
 아래 내용 추가
     
