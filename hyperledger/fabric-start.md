@@ -111,6 +111,7 @@ Server2 이하 S2
     
 
 결과
+
     org1.example.com
     org2.example.com
     
