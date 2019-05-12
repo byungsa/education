@@ -47,3 +47,38 @@ first-network로 이동
 인증서, 채널설정 한 번에 하기
 
     ./byfn.sh generate
+    
+네트워크 시작 한번에 하기
+
+    ./byfn.sh up
+
+네트워크 종료 및 도커 컨테이너 삭제 한 번에 하기
+
+    ./byfn.sh down
+    
+# 채널에 Org3 추가하기
+
+## cli 컨테이너의 설정 변경
+
+container의 디버그 설정을 켬
+
+    vi ~/fabric-samples/first-network/docker-compose-cli.yaml
+    
+아래처럼 수정
+    
+    68       - FABRIC_LOGGING_SPEC=DEBUG
+    69       #- FABRIC_LOGGING_SPEC=INFO
+    
+
+## Org3를 위한 컨테이너 파일 설절파일 만듬.
+
+    ~/fabric-samples/first-network/docker-compose-org3.yaml
+    
+위 컨테이너 설정파일의 디버그 설정을 켬
+
+    vi ~/fabric-samples/first-network/docker-compose-org3.yaml
+    
+아래처럼 수정
+    
+    74       #- FABRIC_LOGGING_SPEC=INFO
+    75       - FABRIC_LOGGING_SPEC=DEBUG
