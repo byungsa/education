@@ -715,7 +715,7 @@ DNS 설정에는 전문적인 기술이 필요하므로 /etc/hosts에 ip와 host
 vi 설치
 
     apt-get update
-    apt-get install vim
+    apt-get install -y vim
     
 vi 실행
 
