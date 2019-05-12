@@ -1003,7 +1003,7 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
 ### Hyperledger Explorer 설치
 
     cd
-    git clone https://github.com/hyperledger/blockchain-explorer
+    git clone https://github.com/leewoonhee/blockchain-explorer
 
 
 ### postgresql 접속 설정
@@ -1017,26 +1017,6 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
     sudo -u postgres ./createdb.sh
     (원래 ./createdb.sh 만 해도 되나 오류가 발생하는 경우가 많음)
 
-### DB 생성확인 (안해도 됨)
-
-    sudo -u postgres psql
-    postgres=# \l
-
-
-### 접속종료
-
-    postgres-# \q
-
-
-### Explorer에 인증서 경로 지정
-
-    vi ~/blockchain-explorer/app/platform/fabric/config.json
-    > :%s /fabric-path/home\/ubuntu/g
-
-### 오류수정
-
-    vi ~/blockchain-explorer/client/src/components/View/LandingPage.spec.js
-    > getBlockActivity: jest.fn(), // 14열에 추가
 
 ### Explorer 빌드
 터미널을 하나 더 열고 실행
@@ -1058,7 +1038,7 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
     ./stop.sh
 
 ### 실시간 로그보기
-    tail -f blockchain-explorer/logs/console/console-2018-12-06.log
+    tail -f blockchain-explorer/logs/console/console-2019-05-22.log
     
 # 실시간 로그 확인하기
 
