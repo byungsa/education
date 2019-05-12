@@ -620,9 +620,9 @@ S1의 MSP중에서 org2에 해당하는 인증서를 S2로 복사
 
     ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com
 
-## S1, S2에서 Docker 컨테이너 작동하기
+## S1, S2에서 Docker 컨테이너 실행하기
 
-S1m S2에 각각 접속해서 fabric 컨테이너를 작동함.
+S1, S2에 각각 접속해서 fabric 컨테이너를 실행함.
 
     docker-compose -f docker-compose-cli.yaml up -d
 
