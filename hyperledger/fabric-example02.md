@@ -56,7 +56,7 @@ first-network로 이동
 
     ./byfn.sh down
     
-# 채널에 Org3 추가하기
+# Org3 관련 파일 생성
 
 ## cli 컨테이너의 설정 변경
 
@@ -70,7 +70,7 @@ container의 디버그 설정을 켬
     69       #- FABRIC_LOGGING_SPEC=INFO
     
 
-## Org3를 위한 컨테이너 파일 설절파일 만듬.
+## Org3를 위한 컨테이너 파일 설정파일 만듬.
 
     ~/fabric-samples/first-network/docker-compose-org3.yaml
     
@@ -82,3 +82,114 @@ container의 디버그 설정을 켬
     
     74       #- FABRIC_LOGGING_SPEC=INFO
     75       - FABRIC_LOGGING_SPEC=DEBUG
+
+## Org3 인증서 생성을 위한 설정파일
+
+    vi ~/fabric-samples/first-network/org3-artifacts/org3-crypto.yaml
+    vi ~/fabric-samples/first-network/org3-artifacts/configtx.yaml
+    
+## Org3 인증서 생성
+
+    cd ~/fabric-samples/first-network/org3-artifacts/
+    ../../bin/cryptogen generate --config=./org3-crypto.yaml
+    
+
+## Org3 정책 정의파일 org3.json 생성
+
+    export FABRIC_CFG_PATH=$PWD
+    ../../bin/configtxgen -printOrg Org3MSP > ../channel-artifacts/org3.json
+    
+
+## orderer MSP 인증서파일을 작업중인 Org3 디렉토리로 복사
+
+    cp -r ~/fabric-samples/first-network/crypto-config/ordererOrganizations ~/fabric-samples/first-network/org3-artifacts/crypto-config/
+    
+***
+
+# Org3 추가하기
+
+## CLI 환경설정
+
+    docker exec -it cli bash
+    export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem  
+    export CHANNEL_NAME=mychannel
+
+## Fetch the Configuration
+
+    peer channel fetch config config_block.pb -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
+
+결과 : config_block.pb, binary protobuf channel configuration block protobuf 파일생성.
+
+
+## Convert the Configuration to JSON and Trim It Down
+
+    configtxlator proto_decode --input config_block.pb --type common.Block | jq .data.data[0].payload.data.config > config.json
+
+결과 : config.json 생성. 기존의 조직과 정책에 대한 파일.
+
+
+## Org3 인증관련 파일 추가
+
+
+    jq -s '.[0] * {"channel_group":{"groups":{"Application":{"groups": {"Org3MSP":.[1]}}}}}' config.json ./channel-artifacts/org3.json > modified_config.json
+
+결과 : modified_config.json 생성. config.json에 Org3의 정보를 담고 있는 org3.json의 내용이 합쳐져서 생성
+
+
+
+config.json을 protobuf로 인코딩
+
+    configtxlator proto_encode --input config.json --type common.Config --output config.pb
+
+결과 : config.pb 생성. 
+
+
+modified_config.json을 protobuf로 인코딩
+
+
+    configtxlator proto_encode --input modified_config.json --type common.Config --output modified_config.pb
+
+결과 : modified_config.pb 생성
+
+
+원래의 config.pb와 수정된 modified_config.pb 새롭게 업데이트 될 protobuf bynary 생성
+
+    configtxlator compute_update --channel_id $CHANNEL_NAME --original config.pb --updated modified_config.pb --output org3_update.pb
+
+결과 : org3_update.pb 생성
+
+
+수정가능한 org3_update.json 형태 파일 생성
+
+    configtxlator proto_decode --input org3_update.pb --type common.ConfigUpdate | jq . > org3_update.json
+결과 : org3_update.json 생성
+
+
+json 양식에 맞게 header 등의 정보 추가.
+
+    echo '{"payload":{"header":{"channel_header":{"channel_id":"mychannel", "type":2}},"data":{"config_update":'$(cat org3_update.json)'}}}' | jq . > org3_update_in_envelope.json
+
+결과 : org3_update_in_envelope.json 생성
+
+
+org3_update_in_envelope.json을 protobuf 인코딩
+
+    configtxlator proto_encode --input org3_update_in_envelope.json --type common.Envelope --output org3_update_in_envelope.pb
+
+결과 : org3_update_in_envelope.pb
+
+
+## 서명 및 업데이트
+
+Org1 Admin 에서의 서명
+
+    peer channel signconfigtx -f org3_update_in_envelope.pb
+    
+
+Org2 Admin 에서의 서명
+
+    export CORE_PEER_LOCALMSPID="Org2MSP"
+    export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+    export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+    export CORE_PEER_ADDRESS=peer0.org2.example.com:9051
+    peer channel update -f org3_update_in_envelope.pb -c $CHANNEL_NAME -o orderer.example.com:7050 --tls --cafile $ORDERER_CA
