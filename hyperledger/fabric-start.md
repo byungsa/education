@@ -668,9 +668,7 @@ S1, S2에 각각 접속해서 fabric 컨테이너를 실행함.
     f36dad7aa063        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 52 seconds       0.0.0.0:8051->9051/tcp     peer0.org2.example.com
     1ef857b24afc        hyperledger/fabric-peer:latest      "peer node start"   54 seconds ago      Up 49 seconds       0.0.0.0:10051->10051/tcp   peer1.org2.example.com
 
-컨테이너 확인하기
 
-    docker ps
     
     
 ## 네트워크 설정하기
