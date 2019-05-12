@@ -253,8 +253,7 @@ services:
       - byfn
 ````
 
-## S1 ~/fabric-samples/first-network/base/docker-compose-base.yaml
-
+## S1 ~/fabric-samples/first-network/base/docker-compose-base.yaml 수정
 
     vi ~/fabric-samples/first-network/base/docker-compose-base.yaml
     
@@ -378,3 +377,300 @@ services:
   #   ports:
   #     - 10051:10051
 ````
+
+
+## S2 ~/fabric-samples/first-network/docker-compose-cli.yaml 수정
+
+    vi ~/fabric-samples/first-network/docker-compose-cli.yaml
+    
+S2에는 다음 컨테이너를 구동
+
+    peer0.org2.example.com
+    peer1.org2.example.com 
+    
+다른 서버와 볼륨은 모두 주석처리
+
+````
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  # orderer.example.com:
+  # peer0.org1.example.com:
+  # peer1.org1.example.com:
+  peer0.org2.example.com:
+  peer1.org2.example.com:
+
+networks:
+  byfn:
+
+services:
+
+  # orderer.example.com:
+  #   extends:
+  #     file:   base/docker-compose-base.yaml
+  #     service: orderer.example.com
+  #   container_name: orderer.example.com
+  #   networks:
+  #     - byfn
+
+  # peer0.org1.example.com:
+  #   container_name: peer0.org1.example.com
+  #   extends:
+  #     file:  base/docker-compose-base.yaml
+  #     service: peer0.org1.example.com
+  #   networks:
+  #     - byfn
+
+  # peer1.org1.example.com:
+  #   container_name: peer1.org1.example.com
+  #   extends:
+  #     file:  base/docker-compose-base.yaml
+  #     service: peer1.org1.example.com
+  #   networks:
+  #     - byfn
+
+  peer0.org2.example.com:
+    container_name: peer0.org2.example.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.org2.example.com
+    networks:
+      - byfn
+
+  peer1.org2.example.com:
+    container_name: peer1.org2.example.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.org2.example.com
+    networks:
+      - byfn
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    stdin_open: true
+    environment:
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      #- FABRIC_LOGGING_SPEC=DEBUG
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
+      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com/chaincode
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      # - orderer.example.com
+      # - peer0.org1.example.com
+      # - peer1.org1.example.com
+      - peer0.org2.example.com
+      - peer1.org2.example.com
+    networks:
+      - byfn
+````
+
+
+## S2 ~/fabric-samples/first-network/base/docker-compose-base.yaml 수정
+
+    vi ~/fabric-samples/first-network/base/docker-compose-base.yaml
+    
+S2에는 다음 컨테이너를 구동
+
+    peer0.org2.example.com
+    peer1.org2.example.com 
+    
+다른 서버와 볼륨은 모두 주석처리
+
+````
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+services:
+
+  # orderer.example.com:
+  #   container_name: orderer.example.com
+  #   extends:
+  #     file: peer-base.yaml
+  #     service: orderer-base
+  #   volumes:
+  #       - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+  #       - ../crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp:/var/hyperledger/orderer/msp
+  #       - ../crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/:/var/hyperledger/orderer/tls
+  #       - orderer.example.com:/var/hyperledger/production/orderer
+  #   ports:
+  #     - 7050:7050
+
+  # peer0.org1.example.com:
+  #   container_name: peer0.org1.example.com
+  #   extends:
+  #     file: peer-base.yaml
+  #     service: peer-base
+  #   environment:
+  #     - CORE_PEER_ID=peer0.org1.example.com
+  #     - CORE_PEER_ADDRESS=peer0.org1.example.com:7051
+  #     - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+  #     - CORE_PEER_CHAINCODEADDRESS=peer0.org1.example.com:7052
+  #     - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+  #     - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org1.example.com:8051
+  #     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org1.example.com:7051
+  #     - CORE_PEER_LOCALMSPID=Org1MSP
+  #   volumes:
+  #       - /var/run/:/host/var/run/
+  #       - ../crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/msp:/etc/hyperledger/fabric/msp
+  #       - ../crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls:/etc/hyperledger/fabric/tls
+  #       - peer0.org1.example.com:/var/hyperledger/production
+  #   ports:
+  #     - 7051:7051
+
+  # peer1.org1.example.com:
+  #   container_name: peer1.org1.example.com
+  #   extends:
+  #     file: peer-base.yaml
+  #     service: peer-base
+  #   environment:
+  #     - CORE_PEER_ID=peer1.org1.example.com
+  #     - CORE_PEER_ADDRESS=peer1.org1.example.com:8051
+  #     - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
+  #     - CORE_PEER_CHAINCODEADDRESS=peer1.org1.example.com:8052
+  #     - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
+  #     - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.example.com:8051
+  #     - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org1.example.com:7051
+  #     - CORE_PEER_LOCALMSPID=Org1MSP
+  #   volumes:
+  #       - /var/run/:/host/var/run/
+  #       - ../crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/msp:/etc/hyperledger/fabric/msp
+  #       - ../crypto-config/peerOrganizations/org1.example.com/peers/peer1.org1.example.com/tls:/etc/hyperledger/fabric/tls
+  #       - peer1.org1.example.com:/var/hyperledger/production
+
+  #   ports:
+  #     - 8051:8051
+
+  peer0.org2.example.com:
+    container_name: peer0.org2.example.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.org2.example.com
+      - CORE_PEER_ADDRESS=peer0.org2.example.com:9051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.org2.example.com:9052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.org2.example.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org2.example.com:10051
+      - CORE_PEER_LOCALMSPID=Org2MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.org2.example.com:/var/hyperledger/production
+    ports:
+      - 9051:9051
+
+  peer1.org2.example.com:
+    container_name: peer1.org2.example.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.org2.example.com
+      - CORE_PEER_ADDRESS=peer1.org2.example.com:10051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org2.example.com:10052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.example.com:10051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.org2.example.com:9051
+      - CORE_PEER_LOCALMSPID=Org2MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls:/etc/hyperledger/fabric/tls
+        - peer1.org2.example.com:/var/hyperledger/production
+    ports:
+      - 10051:10051
+
+````
+
+## S1의 MSP를 S2로 복사하기
+S1의 MSP중에서 org2에 해당하는 인증서를 S2로 복사
+
+아래 디렉토리를 sftp를 이용해서 복사해서 S2의 동일한 경로로 붙여넣기
+    ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com
+    
+## 네트워크 설정하기
+
+다음 3가지 중의 하나를 사용해야 네트워크 사용이 가능함
+* 공인 DNS 서비스
+* 사설 DNS 서비스
+* /ets/hosts 등록
+
+DNS 설정에는 전문적인 기술이 필요하므로 /etc/hosts에 ip와 host를 등록해야함.
+
+아래 서버에 모두 /etc/hosts를 수정해야함
+    S1
+    S2
+    orderer.example.com
+    peer0.org1.example.com
+    peer1.org1.example.com 
+    peer0.org2.example.com
+    peer1.org2.example.com 
+
+### S1, S2의 /etc/hosts 수정
+
+    sudo vi /etc/hosts
+    
+    아래 내용 추가
+    
+    123.123.123.123 orderer.example.com
+    123.123.123.123 peer0.org1.example.com
+    123.123.123.123 peer1.org1.example.com
+    210.210.210.210 peer0.org2.example.com 
+    210.210.210.210 peer1.org2.example.com 
+    
+### orderer, peer 수정
+
+아래의 방법으로 컨테이너에 연결
+
+    docker exec -it orderer.example.com bash
+    docker exec -it peer0.org1.example.com bash
+    docker exec -it peer1.org1.example.com bash
+    docker exec -it peer0.org2.example.com bash
+    docker exec -it peer1.org2.example.com bash
+    
+vi 설치
+
+    apt-get update
+    apt-get install vim
+    
+    sudo vi /etc/hosts
+    
+    아래 내용 추가
+    
+    123.123.123.123 orderer.example.com
+    123.123.123.123 peer0.org1.example.com
+    123.123.123.123 peer1.org1.example.com
+    210.210.210.210 peer0.org2.example.com 
+    210.210.210.210 peer1.org2.example.com 
+    
+    
