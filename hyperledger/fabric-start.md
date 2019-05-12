@@ -616,6 +616,7 @@ services:
 S1의 MSP중에서 org2에 해당하는 인증서를 S2로 복사
 
 아래 디렉토리를 sftp를 이용해서 복사해서 S2의 동일한 경로로 붙여넣기
+
     ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com
     
 ## 네트워크 설정하기
@@ -628,6 +629,7 @@ S1의 MSP중에서 org2에 해당하는 인증서를 S2로 복사
 DNS 설정에는 전문적인 기술이 필요하므로 /etc/hosts에 ip와 host를 등록해야함.
 
 아래 서버에 모두 /etc/hosts를 수정해야함
+
     S1
     S2
     orderer.example.com
@@ -640,7 +642,7 @@ DNS 설정에는 전문적인 기술이 필요하므로 /etc/hosts에 ip와 host
 
     sudo vi /etc/hosts
     
-    아래 내용 추가
+아래 내용 추가
     
     123.123.123.123 orderer.example.com
     123.123.123.123 peer0.org1.example.com
@@ -665,7 +667,7 @@ vi 설치
     
     sudo vi /etc/hosts
     
-    아래 내용 추가
+아래 내용 추가
     
     123.123.123.123 orderer.example.com
     123.123.123.123 peer0.org1.example.com
