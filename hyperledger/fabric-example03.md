@@ -25,6 +25,7 @@
     peer chaincode install -n mycc -v 2.0 -p github.com/chaincode/chaincode_example02_2/go
 
 ### peer0.org2에 새로운 버전의 chaincode 등록하기
+    export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
     CORE_PEER_ADDRESS=peer0.org2.example.com:9051
     CORE_PEER_LOCALMSPID="Org2MSP"
