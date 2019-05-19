@@ -15,11 +15,11 @@
 
 환경변수 설정하기
 
-    vi ~/.profile
-
+    echo "
     export GOROOT=$HOME/go
     export GOPATH=$HOME/workspace
     export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+    " >> ~/.profile
 
 로그아웃 후 로그인.
 
