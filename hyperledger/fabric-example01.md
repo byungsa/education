@@ -484,13 +484,15 @@ Fabric cli 컨테이너로 접속
     CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
     peer channel create -o orderer.example.com:7050 -c $CHANNEL_NAME -f ./channel-artifacts/channel.tx --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
+
+
 ### S2-cli : orderer에 접속해서 mychannel.tx 가져옴.
 
     export CHANNEL_NAME=mychannel
-    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
-    CORE_PEER_ADDRESS=peer0.org1.example.com:7051
-    CORE_PEER_LOCALMSPID="Org1MSP"
-    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+    CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+    CORE_PEER_ADDRESS=peer0.org2.example.com:9051
+    CORE_PEER_LOCALMSPID="Org2MSP"
+    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt  
     peer channel fetch 0 $CHANNEL_NAME.block -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 
@@ -502,7 +504,7 @@ Fabric cli 컨테이너로 접속
 
 ## 피어를 채널에 참여시킴
 
-### peer0.org1 을 mychannel에 참여
+### S1-cli : peer0.org1 을 mychannel에 참여
 
     export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
@@ -519,7 +521,7 @@ Fabric cli 컨테이너로 접속
 
 
 
-### peer1.org1 을 mychannel에 참여
+### S1-cli : peer1.org1 을 mychannel에 참여
 
 
     export CHANNEL_NAME=mychannel
@@ -531,7 +533,7 @@ Fabric cli 컨테이너로 접속
     
     
     
-### peer0.org2 을 mychannel에 참여
+### S2-cli : peer0.org2 을 mychannel에 참여
 
     export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
@@ -542,7 +544,7 @@ Fabric cli 컨테이너로 접속
 
     
     
-### peer1.org2 을 mychannel에 참여
+### S2-cli : peer1.org2 을 mychannel에 참여
 
 
     export CHANNEL_NAME=mychannel
