@@ -57,7 +57,8 @@ first-network로 이동
 
     ./byfn.sh down
     
-    
+***
+
 # 두 개의 서버에서 네트워크 구동하기
 
 Server1 이하 S1
@@ -82,6 +83,7 @@ Server2 이하 S2
     cd
     curl -sSL http://bit.ly/2ysbOFE | bash -s
 
+***
 
 ## S2
 ### 사전설치하기
@@ -102,6 +104,7 @@ Server2 이하 S2
     cd
     curl -sSL http://bit.ly/2ysbOFE | bash -s
 
+***
 
 ## S1에서 각종 트랜잭션 파일 만들기
 
