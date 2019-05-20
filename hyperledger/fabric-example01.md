@@ -839,3 +839,29 @@ nodejs 8.14.x (9.x 버전은 지원하지 않음), PostgreSQL 9.5 or greater, Jq
     docker logs -f peer0.org2.example.com
     docker logs -f peer1.org2.example.com
 
+# Docker 명령어
+
+## Container
+
+
+| 내용             | 명령어                |
+|-----------------|-----------------------|
+| 조회(작동중)   | $ docker ps |
+| 조회(모두)   | $ docker ps -a |
+| 정지   | $ docker stop [CONTAINER ID], [CONTAINER ID] |
+| 정지(모두)   | $ docker stop \`docker ps -aq\` |
+| 삭제  | $ docker rm [CONTAINER ID], [CONTAINER ID] |
+| 삭제(모두) | $ docker rm \`docker ps -aq\` |
+| 볼륨삭제(모두) | $ docker volume rm $(docker volume ls -qf dangling=true) |
+  
+ 
+## Images
+
+| 내용             | 명령어                |
+|-----------------|-----------------------|
+| 조회   | $ docker images |
+| 삭제  | $ docker rmi [IMAGE ID], [IMAGE ID] |
+| 삭제(모두) | $ docker rmi \`docker images -q\` |
+| 삭제(강제) | $ docker rmi -f \`docker images -q\` |
+
+
