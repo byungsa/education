@@ -131,6 +131,7 @@ S1에는 다음 컨테이너를 구동
     peer1.org1.example.com 
     
 다른 서버와 볼륨은 모두 주석처리
+/etc/hosts 호스트 등록처리
 
 ````
 # Copyright IBM Corp. All Rights Reserved.
@@ -157,6 +158,12 @@ services:
       file:   base/docker-compose-base.yaml
       service: orderer.example.com
     container_name: orderer.example.com
+    extra_hosts:
+      - "orderer.example.com:10.0.1.28"      
+      - "peer0.org1.example.com:10.0.1.28"
+      - "peer1.org1.example.com:10.0.1.28"
+      - "peer0.org2.example.com:10.0.1.55"
+      - "peer1.org2.example.com:10.0.1.55"
     networks:
       - byfn
 
@@ -165,6 +172,12 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer0.org1.example.com
+    extra_hosts:
+      - "orderer.example.com:10.0.1.28"      
+      - "peer0.org1.example.com:10.0.1.28"
+      - "peer1.org1.example.com:10.0.1.28"
+      - "peer0.org2.example.com:10.0.1.55"
+      - "peer1.org2.example.com:10.0.1.55"
     networks:
       - byfn
 
@@ -173,6 +186,12 @@ services:
     extends:
       file:  base/docker-compose-base.yaml
       service: peer1.org1.example.com
+    extra_hosts:
+      - "orderer.example.com:10.0.1.28"      
+      - "peer0.org1.example.com:10.0.1.28"
+      - "peer1.org1.example.com:10.0.1.28"
+      - "peer0.org2.example.com:10.0.1.55"
+      - "peer1.org2.example.com:10.0.1.55"
     networks:
       - byfn
 
@@ -224,6 +243,12 @@ services:
       - peer1.org1.example.com
       # - peer0.org2.example.com
       # - peer1.org2.example.com
+    extra_hosts:
+      - "orderer.example.com:10.0.1.28"      
+      - "peer0.org1.example.com:10.0.1.28"
+      - "peer1.org1.example.com:10.0.1.28"
+      - "peer0.org2.example.com:10.0.1.55"
+      - "peer1.org2.example.com:10.0.1.55"
     networks:
       - byfn
 ````
