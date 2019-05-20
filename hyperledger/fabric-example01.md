@@ -15,16 +15,15 @@
 Server1 이하 S1
 Server2 이하 S2
 
-## S1 
-### S1 사전설치하기
+## S1, S2 사전설치하기
     sudo apt-get update && curl -fsSL https://get.docker.com/ | sudo sh && sudo apt install -y docker-compose && cd && wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz && tar zxvf go1.11.1.linux-amd64.tar.gz && cd && curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt-get install -y nodejs &&  sudo npm install npm@5.6.0 -g && sudo chown -R $USER:$(id -gn $USER) /home/ubuntu/.config  && sudo apt-get install -y gcc g++ make
     
 
-### S1 Docker 권한 부여하기
+## S1, S2 Docker 권한 부여하기
     sudo usermod -aG docker $USER
 
 
-### S1 환경변수 설정하기
+## S1, S2 환경변수 설정하기
 
 
     echo "
@@ -38,40 +37,10 @@ Server2 이하 S2
 
     exit
 
-### S1 fabric 이미지 받기
+## S1, S2 fabric 이미지 받기
     cd
     curl -sSL http://bit.ly/2ysbOFE | bash -s
 
-***
-
-## S2 
-### S2 사전설치하기
-    sudo apt-get update && curl -fsSL https://get.docker.com/ | sudo sh && sudo apt install -y docker-compose && cd && wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz && tar zxvf go1.11.1.linux-amd64.tar.gz && cd && curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt-get install -y nodejs &&  sudo npm install npm@5.6.0 -g && sudo chown -R $USER:$(id -gn $USER) /home/ubuntu/.config  && sudo apt-get install -y gcc g++ make
-    
-
-### S2 Docker 권한 부여하기
-    sudo usermod -aG docker $USER
-
-
-
-### S2 환경변수 설정하기
-
-
-    echo "
-    export GOROOT=$HOME/go
-    export GOPATH=$HOME/workspace
-    export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
-    " >> ~/.profile
-     
-
-'exit' 로그아웃 후 로그인.
-
-    exit
-
-
-### S2 fabric 이미지 받기
-    cd
-    curl -sSL http://bit.ly/2ysbOFE | bash -s
 ***
 
 # 각종 파일 생성하기
