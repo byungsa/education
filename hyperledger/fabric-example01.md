@@ -89,6 +89,7 @@ Server2 이하 S2
     
 ### Orderer Genesis Block 생성
 
+    cd ~/fabric-samples/first-network/
     export FABRIC_CFG_PATH=$PWD
     ../bin/configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
     
@@ -109,10 +110,20 @@ Server2 이하 S2
     2018-12-05 09:39:41.294 UTC [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 002 Generating new channel configtx
     2018-12-05 09:39:41.295 UTC [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 003 Writing new channel tx
     
-### Anchor peer 정의 transaction 생성
+## Anchor peer 정의 transaction 생성
+
+### S1
+
+    cd ~/fabric-samples/first-network/
     export CHANNEL_NAME=mychannel
     ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+   
+### S2
+
+    cd ~/fabric-samples/first-network/
+    export CHANNEL_NAME=mychannel
     ../bin/configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+
 
 결과 
 
@@ -120,6 +131,10 @@ Server2 이하 S2
     2018-12-05 09:42:07.591 UTC [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 002 Generating anchor peer update
     2018-12-05 09:42:07.591 UTC [common/tools/configtxgen] doOutputAnchorPeersUpdate -> INFO 003 Writing anchor peer update
     
+***
+
+# Docker 설정 수정
+
 ## S1 ~/fabric-samples/first-network/docker-compose-cli.yaml 수정
 
     vi ~/fabric-samples/first-network/docker-compose-cli.yaml
