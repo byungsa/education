@@ -45,6 +45,23 @@ Server2 이하 S2
 
 # 각종 파일 생성하기
 
+### S1 인증서 설정파일 수정
+
+    vi ~/fabric-samples/first-network/crypto-config.yaml
+    
+orderer와 Org1의 인증서만 설치
+Org2 부분은 주석처리
+````
+# - Name: Org2
+#   Domain: org2.example.com
+#   EnableNodeOUs: true
+#   Template:
+#     Count: 2
+#   Users:
+#     Count: 1
+````
+
+
 ### S1 인증서 생성
     cd ~/fabric-samples/first-network/
     ../bin/cryptogen generate --config=./crypto-config.yaml
@@ -53,9 +70,51 @@ Server2 이하 S2
 결과
 
     org1.example.com
+
+
+### S2 인증서 설정파일 수정
+
+    vi ~/fabric-samples/first-network/crypto-config.yaml
+    
+Org2 의 인증서만 설치
+orderer와 Org1 부분 주석처리하고 아래부분만 남김
+````
+PeerOrgs:
+  - Name: Org2
+    Domain: org2.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+    Users:
+      Count: 1
+````
+
+
+### S2 인증서 생성
+    cd ~/fabric-samples/first-network/
+    ../bin/cryptogen generate --config=./crypto-config.yaml
+    
+
+결과
+
     org2.example.com
+
+## MSP 복사
+
+## S1의 MSP를 S2로 복사하기
+S1의 MSP중에서 orderer에 해당하는 인증서를 S2로 복사
+
+아래 디렉토리를 sftp를 이용해서 복사해서 S2의 동일한 경로로 붙여넣기
+
+    ~/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+    ~/fabric-samples/first-networkcrypto-config/peerOrganizations/org1.example.com/msp
     
-    
+## S2의 MSP를 S1으로 복사하기
+
+    ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com/msp
+
+
+
 ### S1 : Orderer Genesis Block 생성
 
     cd ~/fabric-samples/first-network/
@@ -365,15 +424,6 @@ services:
 ````
 
 ***
-
-## S1의 MSP를 S2로 복사하기
-S1의 MSP중에서 org2에 해당하는 인증서를 S2로 복사
-
-아래 디렉토리를 sftp를 이용해서 복사해서 S2의 동일한 경로로 붙여넣기
-
-    ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com
-
-    ~/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 ## S1, S2에서 Docker 컨테이너 실행하기
 
