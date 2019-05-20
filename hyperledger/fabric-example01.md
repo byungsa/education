@@ -607,7 +607,7 @@ Fabric cli 컨테이너로 접속
 
 peer의 명령어 옵션은 체인코드를 설치하기 위한 install, 데이터를 쓰기 위한 invoke, 데이터를 조회하는 query가 있다.
 
-peer0.org1 에 체인코드 인스톨
+###  S1-cli : peer0.org1 에 체인코드 인스톨
 
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
     CORE_PEER_ADDRESS=peer0.org1.example.com:7051
@@ -616,7 +616,7 @@ peer0.org1 에 체인코드 인스톨
     peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go
 
 
-peer1.org1 에 체인코드 인스톨
+###  S1-cli : peer1.org1 에 체인코드 인스톨
 
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
     CORE_PEER_ADDRESS=peer1.org1.example.com:8051
@@ -625,7 +625,7 @@ peer1.org1 에 체인코드 인스톨
     peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go
 
 
-peer0.org2 에 체인코드 인스톨
+###  S2-cli : peer0.org2 에 체인코드 인스톨
 
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
     CORE_PEER_ADDRESS=peer0.org2.example.com:9051
@@ -634,7 +634,7 @@ peer0.org2 에 체인코드 인스톨
     peer chaincode install -n mycc -v 1.0 -p github.com/chaincode/chaincode_example02/go
 
 
-peer1.org2 에 체인코드 인스톨
+###  S2-cli : peer1.org2 에 체인코드 인스톨
 
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
     CORE_PEER_ADDRESS=peer1.org2.example.com:10051
@@ -647,7 +647,7 @@ https://github.com/hyperledger/fabric-samples/blob/release-1.3/chaincode/chainco
 
 
 ## Chaincode 초기화
-peer0.org1에서 체인코드를 초기화한다.
+###  S1-cli : peer0.org1에서 체인코드를 초기화한다.
 
     export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
@@ -701,7 +701,7 @@ AND 조건 : Org1 멤버중의 하나 && Org2 멤버중의 하나
     
     
 ## Invoke
-### a의 10을 b로 이체하는 체인코드 invoke
+### S1-cli : a의 10을 b로 이체하는 체인코드 invoke
 
     export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
@@ -719,7 +719,7 @@ AND 조건 : Org1 멤버중의 하나 && Org2 멤버중의 하나
 
 ## Query 확인
 
-### Invoke의 결과로 a에 90이 저장됐는지 확인.
+### S1-cli : Invoke의 결과로 a에 90이 저장됐는지 확인.
 
     export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
@@ -733,14 +733,14 @@ AND 조건 : Org1 멤버중의 하나 && Org2 멤버중의 하나
     90
 
 
-### 다른 피어, peer1.org2에 원장이 복제되었는지 확인
+### 다른 피어, peer0.org2에 원장이 복제되었는지 확인
 
-### peer1.org2에 체인코드 인스톨
+### S2-cli : peer0.org2에서 조회 쿼리
     export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
-    CORE_PEER_ADDRESS=peer1.org2.example.com:10051
+    CORE_PEER_ADDRESS=peer0.org2.example.com:9051
     CORE_PEER_LOCALMSPID="Org2MSP"
-    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer1.org2.example.com/tls/ca.crt
+    CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
     peer chaincode query -C $CHANNEL_NAME -n mycc -c '{"Args":["query","a"]}'
 
 
