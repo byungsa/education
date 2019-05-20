@@ -26,12 +26,13 @@ Server2 이하 S2
 
 ### S1 환경변수 설정하기
 
-    vi ~/.profile
 
+    echo "
     export GOROOT=$HOME/go
     export GOPATH=$HOME/workspace
     export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
-
+    " >> ~/.profile
+     
 
 'exit' 로그아웃 후 로그인.
 
@@ -52,18 +53,21 @@ Server2 이하 S2
     sudo usermod -aG docker $USER
 
 
+
 ### S2 환경변수 설정하기
 
-    vi ~/.profile
 
+    echo "
     export GOROOT=$HOME/go
     export GOPATH=$HOME/workspace
     export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
-
+    " >> ~/.profile
+     
 
 'exit' 로그아웃 후 로그인.
 
     exit
+
 
 ### S2 fabric 이미지 받기
     cd
