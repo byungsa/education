@@ -14,14 +14,22 @@
 
     sudo chmod 755 -R ~/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/
     
-### 새로운 Peer에 대한 docker-compose-new-peer.yaml 설정
+### 새로운 Peer에 대한 docker-compose-cli.yaml 수정
     
-    services:
+      peer2.org1.example.com:
+        container_name: peer2.org1.example.com
+        extends:
+          file:  base/docker-compose-base.yaml
+          service: peer2.org1.example.com
+        networks:
+          - byfn
+    
+### 새로운 Peer에 대한 docker-compose-base.yaml 수정
 
       peer2.org1.example.com:
         container_name: peer2.org1.example.com
         extends:
-          file: base/peer-base.yaml
+          file: peer-base.yaml
           service: peer-base
         environment:
           - CORE_PEER_ID=peer2.org1.example.com
