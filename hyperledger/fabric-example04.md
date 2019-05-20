@@ -21,7 +21,7 @@
       peer2.org1.example.com:
         container_name: peer2.org1.example.com
         extends:
-          file: peer-base.yaml
+          file: base/peer-base.yaml
           service: peer-base
         environment:
           - CORE_PEER_ID=peer2.org1.example.com
