@@ -74,9 +74,9 @@ Server2 이하 S2
     curl -sSL http://bit.ly/2ysbOFE | bash -s
 ***
 
-## S1에서 각종 트랜잭션 파일 만들기
+# 각종 파일 생성하기
 
-### 인증서 생성
+### S1 인증서 생성
     cd ~/fabric-samples/first-network/
     ../bin/cryptogen generate --config=./crypto-config.yaml
     
@@ -87,7 +87,7 @@ Server2 이하 S2
     org2.example.com
     
     
-### Orderer Genesis Block 생성
+### S1 : Orderer Genesis Block 생성
 
     cd ~/fabric-samples/first-network/
     export FABRIC_CFG_PATH=$PWD
@@ -100,7 +100,8 @@ Server2 이하 S2
     2018-12-05 19:21:56.309 EDT [common/tools/configtxgen] doOutputBlock -> INFO 003 Writing genesis block
     
     
-### Channel configuration transaction 생성
+### S1 : Channel configuration transaction 생성
+    cd ~/fabric-samples/first-network/
     export CHANNEL_NAME=mychannel
     ../bin/configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
 
@@ -109,7 +110,8 @@ Server2 이하 S2
     2018-12-05 09:39:41.270 UTC [common/tools/configtxgen] main -> INFO 001 Loading configuration
     2018-12-05 09:39:41.294 UTC [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 002 Generating new channel configtx
     2018-12-05 09:39:41.295 UTC [common/tools/configtxgen] doOutputChannelCreateTx -> INFO 003 Writing new channel tx
-    
+   
+   
 ## Anchor peer 정의 transaction 생성
 
 ### S1
