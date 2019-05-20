@@ -387,6 +387,8 @@ S1의 MSP중에서 org2에 해당하는 인증서를 S2로 복사
 
     ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com
 
+    ~/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+
 ## S1, S2에서 Docker 컨테이너 실행하기
 
 S1, S2에 각각 접속해서 fabric 컨테이너를 실행함.
