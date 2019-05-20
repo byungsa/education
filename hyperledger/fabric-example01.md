@@ -593,7 +593,7 @@ Fabric cli 컨테이너로 접속
     2018-12-05 11:13:02.565 UTC [channelCmd] update -> INFO 002 Successfully submitted channel update
 
 
-### S1-cli : peer0.org2 Anchor Peer 설정
+### S2-cli : peer0.org2 Anchor Peer 설정
     export CHANNEL_NAME=mychannel
     CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
     CORE_PEER_ADDRESS=peer0.org2.example.com:9051
