@@ -108,10 +108,13 @@ S1의 MSP중에서 orderer에 해당하는 인증서를 S2로 복사
 
     ~/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
     ~/fabric-samples/first-networkcrypto-config/peerOrganizations/org1.example.com/msp
+    ~/fabric-samples/first-network/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+
     
 ### S2의 MSP를 S1으로 복사하기
 
     ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com/msp
+    ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
 
 ***
 
