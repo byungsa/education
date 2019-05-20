@@ -12,8 +12,8 @@
 
 # 두 개의 서버에서 네트워크 구동하기
 
-Server1 이하 S1
-Server2 이하 S2
+* Server1 이하 S1
+* Server2 이하 S2
 
 ## S1, S2 사전설치하기
     sudo apt-get update && curl -fsSL https://get.docker.com/ | sudo sh && sudo apt install -y docker-compose && cd && wget https://dl.google.com/go/go1.11.1.linux-amd64.tar.gz && tar zxvf go1.11.1.linux-amd64.tar.gz && cd && curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh && sudo bash nodesource_setup.sh && sudo apt-get install -y nodejs &&  sudo npm install npm@5.6.0 -g && sudo chown -R $USER:$(id -gn $USER) /home/ubuntu/.config  && sudo apt-get install -y gcc g++ make
