@@ -448,54 +448,7 @@ S1, S2에 각각 접속해서 fabric 컨테이너를 실행함.
 
 DNS 설정에는 전문적인 기술이 필요하므로 /etc/hosts에 ip와 host를 등록해야함.
 
-아래 서버에 모두 /etc/hosts를 수정해야함
-
-    S1
-    S2
-    orderer.example.com
-    peer0.org1.example.com
-    peer1.org1.example.com 
-    peer0.org2.example.com
-    peer1.org2.example.com 
-
-### S1, S2의 /etc/hosts 수정
-
-    sudo vi /etc/hosts
-    
-아래 내용 추가
-    
-    123.123.123.123 orderer.example.com
-    123.123.123.123 peer0.org1.example.com
-    123.123.123.123 peer1.org1.example.com
-    210.210.210.210 peer0.org2.example.com 
-    210.210.210.210 peer1.org2.example.com 
-    
-### orderer, peer 수정
-
-아래의 방법으로 컨테이너에 연결
-
-    docker exec -it orderer.example.com bash
-    docker exec -it peer0.org1.example.com bash
-    docker exec -it peer1.org1.example.com bash
-    docker exec -it peer0.org2.example.com bash
-    docker exec -it peer1.org2.example.com bash
-    
-vi 설치
-
-    apt-get update
-    apt-get install -y vim
-    
-vi 실행
-
-    vi /etc/hosts
-    
-아래 내용 추가
-    
-    123.123.123.123 orderer.example.com
-    123.123.123.123 peer0.org1.example.com
-    123.123.123.123 peer1.org1.example.com
-    210.210.210.210 peer0.org2.example.com 
-    210.210.210.210 peer1.org2.example.com 
+docker 설정에서 extra_hosts 옵션을 통해 /etc/hosts 자동 등록 설정
     
 ***
 
