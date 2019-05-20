@@ -101,7 +101,7 @@ PeerOrgs:
 
 ## MSP 복사
 
-## S1의 MSP를 S2로 복사하기
+### S1의 MSP를 S2로 복사하기
 S1의 MSP중에서 orderer에 해당하는 인증서를 S2로 복사
 
 아래 디렉토리를 sftp를 이용해서 복사해서 S2의 동일한 경로로 붙여넣기
@@ -109,11 +109,13 @@ S1의 MSP중에서 orderer에 해당하는 인증서를 S2로 복사
     ~/fabric-samples/first-network/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
     ~/fabric-samples/first-networkcrypto-config/peerOrganizations/org1.example.com/msp
     
-## S2의 MSP를 S1으로 복사하기
+### S2의 MSP를 S1으로 복사하기
 
     ~/fabric-samples/first-network/crypto-config/peerOrganizations/org2.example.com/msp
 
+***
 
+## 블록 및 트랜잭션 생성
 
 ### S1 : Orderer Genesis Block 생성
 
