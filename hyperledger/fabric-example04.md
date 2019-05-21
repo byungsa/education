@@ -53,8 +53,9 @@
 
 ### 새로운 Peer Docker 실행하기
 
-    docker-compose -f docker-compose-new-peer.yaml up -d
+    docker-compose -f docker-compose-cli.yaml down
    
+    docker-compose -f docker-compose-cli.yaml up -d
    
 ### 기존 Channel에 Join 하기
 
